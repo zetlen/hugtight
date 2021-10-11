@@ -23,16 +23,7 @@ TWITTER_ACCESS_TOKEN=hualgahualghuahg
 TWITTER_ACCESS_TOKEN_SECRET=a8os7ydna8sd7ya9s8nyda8yn77o
 ```
 
-or, by setting the env var `HUGTIGHT_OUTFILE=<path>`, you can output that to an env file, like:
-
-```sh
-TWITTER_API_KEY=xxxxxx \
-  TWITTER_API_SECRET=yyyyyyyyyy \
-  HUGTIGHT_OUTFILE=.env \
-  npx hugtight
-```
-
 ### Notes
 
+- Output to a file by redirecting stdout, e.g. `npx hugtight >> .env`. All the prompts and logging are on the stderr stream, so they won't output to the file; only the env vars themselves will.
 - Uses `dotenv` to get env vars, so if you don't pass 'em at the command line, it will use the api keys and other env vars in an `.env` file in the working directory if one exists.
-- If outfile is specified, hugtight will attempt to append to any existing file there--so it's safe to output to the same .env file without overwriting!

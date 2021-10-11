@@ -3,13 +3,13 @@ function hugtight() {
   const readline = require("readline");
   const camelspace = require("camelspace");
   const { TwitterClient } = require("twitter-api-client");
-  const chalk = require("chalk");
+  const chalk = require("chalk").stderr;
 
   async function ask(prompt) {
     return new Promise((resolve, reject) => {
       const rl = readline.createInterface({
         input: process.stdin,
-        output: process.stdout,
+        output: process.stderr,
       });
       try {
         rl.question(
@@ -33,24 +33,23 @@ function hugtight() {
   }
 
   function narrate(...args) {
-    console.log(chalk.gray.bgBlack(...args));
+    console.warn(chalk.gray.bgBlack(...args));
   }
-  
+
   function die(msg) {
     console.error(chalk.bold.red(msg));
-    process.exit(1)
+    process.exit(1);
   }
 
   async function main() {
-    if (!process.stdout.isTTY) {
-        die("hugtight is an interactive script and will not run outside a terminal window");
+    if (!process.stderr.isTTY) {
+      die(
+        "hugtight is an interactive script and will not run outside a terminal window"
+      );
     }
 
-    const {
-      twitter: appAuth = {},
-      hugtight: { outfile },
-    } = camelspace.of(["twitter", "hugtight"]);
-    
+    const { twitter: appAuth = {} } = camelspace.of(["twitter"]);
+
     const twitter = new TwitterClient(appAuth);
 
     narrate("You're gonna help me get the rights to post as a Twitter user.");
@@ -71,8 +70,8 @@ function hugtight() {
 
     let pin = await ask(
       instruct(`Click the link below.
-    ${chalk.blueBright(redirectUrl)}
-  You may be asked to authorize the app. Once you have done so, it will show you a several-digit PIN number. Type or paste that PIN here and press <Enter>.`)
+      ${chalk.blueBright(redirectUrl)}
+    You may be asked to authorize the app. Once you have done so, it will show you a several-digit PIN number. Type or paste that PIN here and press <Enter>.`)
     );
 
     while (isNaN(Number(pin))) {
@@ -93,39 +92,29 @@ function hugtight() {
       chalk.green(`  ✅ Success! Access token for ${account} obtained.\n`)
     );
 
-    const userTokenVars = `TWITTER_API_KEY=${appAuth.apiKey}
+    const userTokenVars = `
+TWITTER_API_KEY=${appAuth.apiKey}
 TWITTER_API_SECRET=${appAuth.apiSecret}
 TWITTER_ACCESS_TOKEN=${accountAuth.oauth_token}
 TWITTER_ACCESS_TOKEN_SECRET=${accountAuth.oauth_token_secret}
-`;
+  `;
 
-    if (outfile) {
-      const { writeFileSync, constants: c } = require("fs");
-      writeFileSync(outfile, userTokenVars, {
-        encoding: "utf8",
-        mode: c.S_IRUSR | c.S_IWUSR,
-        flag: c.O_APPEND | c.O_DSYNC,
-      });
-      narrate(
-        `Wrote env vars to "${outfile}". Use them to tweet as ${account}.`
-      );
-    } else {
-      console.log(
+    if (process.stdout.isTTY) {
+      console.warn(
         instruct(
           `To tweet as ${account}, use the following environment variables when running the Twitter client in the bot server:`
-        ) +
-          `
-${userTokenVars}
-
-${chalk.greenBright("Done.")}
-`
+        )
       );
+    } else {
+      console.warn(chalk.greenBright("Wrote env vars to stdout."));
     }
-  }
 
+    console.log(userTokenVars);
+  }
   main().catch((e) => {
     console.error(e);
     process.exit(1);
   });
 }
+
 module.exports = hugtight;
