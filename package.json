@@ -1,7 +1,7 @@
 {
   "name": "hugtight",
   "version": "0.0.1",
-  "description": "CLI for devs to turn twitter app tokens into user tokens",
+  "description": "CLI for devs to turn twitter app/dev tokens into user tokens",
   "bin": "bin/hugtight",
   "scripts": {
     "fmt": "prettier --write '**/*.js'",
