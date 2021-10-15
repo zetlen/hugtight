@@ -1,0 +1,15 @@
+{
+  "mockTwitter": {
+    "oauthToken": "mellon",
+    "screenName": "JoyceCarolOates",
+    "secondOauthToken": "squirrel",
+    "secondOauthTokenSecret": "nuts",
+    "pin": "12345"
+  },
+  "twitter": {
+    "apiKey": 12345,
+    "apiSecret": 67890,
+    "accessToken": "abcde",
+    "accessTokenSecret": "fghij"
+  }
+}

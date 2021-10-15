@@ -1,2 +1,5 @@
 #!/usr/bin/env node
-require("../hugtight")();
+require("../lib/hugtight")().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});
