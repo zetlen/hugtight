@@ -58,20 +58,6 @@ async function testSuite({ env: defaultEnv, cases: casesObj }) {
       }
     });
   }, Promise.resolve());
-  // await Promise.all(
-  //   cases.map(async ([name, testFn]) => {
-  //     } else if (!realtime) {
-  //       const margin = chalk.cyan(" | ");
-  //       report.push(
-  //         chalk.cyan("Session:"),
-  //         margin,
-  //         ...body.map((line) => margin + chalk.dim(line))
-  //       );
-  //       report.push(chalk.greenBright.underline(`[PASS]: ${name}`));
-  //     }
-  //     const margin = chalk.yellow(" | ");
-  //     console.log(`${header}\n${margin}\n${report.join("\n" + margin)}`);
-  //   })
   console.log(chalk.whiteBright("\n——————————————————"));
   console.log(chalk.bold(`${cases.length} tests run`));
   console.log(chalk.bold.greenBright(`${cases.length - failures} passed`));
