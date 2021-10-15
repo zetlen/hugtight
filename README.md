@@ -2,9 +2,9 @@
 
 **CLI for devs to turn twitter app/dev tokens into user tokens**
 
-> Mr Twit was good at catching birds. On the day before Bird Pie day, he would put the ladder up against The Big Dead Tree and climb into the branches with a bucket of glue and a paint-brush. The glue he used was something called HUGTIGHT and it was stickier than any other glue in the world. He would paint it along the tops of all the branches and then go away.
-
 ![hugtight](img/mr_twit.jpg)
+
+> Mr Twit was good at catching birds. On the day before Bird Pie day, he would put the ladder up against The Big Dead Tree and climb into the branches with a bucket of glue and a paint-brush. The glue he used was something called HUGTIGHT and it was stickier than any other glue in the world.
 
 ## usage
 
