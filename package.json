@@ -1,6 +1,6 @@
 {
   "name": "hugtight",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "CLI for devs to turn twitter app/dev tokens into user tokens",
   "bin": "bin/hugtight",
   "scripts": {
